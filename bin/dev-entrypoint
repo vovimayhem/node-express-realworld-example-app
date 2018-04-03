@@ -1,0 +1,11 @@
+#! /bin/sh
+
+# 1: Run the setup routine if the command is 'npm':
+if [ "$1" = "npm" ]
+then
+  # 7: Check or install npm/bower dependencies:
+  check-dependencies || yarn install
+fi
+
+# 9: Execute the given or default command:
+exec "$@"

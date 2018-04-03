@@ -7,6 +7,9 @@ services:
   # Our MongoDB service:
   mongodb:
     image: mongo:3.6
+    ports:
+    - published: ${DEMO_MONGO_PORT:-27017}
+      target: 27017
     volumes:
     - mongo_data:/data/db
 
@@ -17,4 +20,12 @@ services:
       dockerfile: dev.Dockerfile
     volumes:
     - .:/usr/src
+    ports:
+    - published: ${DEMO_WEB_PORT:-3000}
+      target: 3000
+    depends_on:
+    - mongodb
+    entrypoint: /usr/src/bin/dev-entrypoint
     command: npm run dev
+    environment:
+      MONGODB_URI: mongodb://mongodb:27017/conduit

@@ -35,3 +35,9 @@ node_modules
 .node_repl_history
 
 .idea
+
+# Ignore history artifacts:
+.*_hist*
+
+# Ignore npm configuration:
+.config
