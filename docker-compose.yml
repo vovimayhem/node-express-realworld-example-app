@@ -1,0 +1,20 @@
+version: "3.4"
+
+volumes:
+  mongo_data:
+
+services:
+  # Our MongoDB service:
+  mongodb:
+    image: mongo:3.6
+    volumes:
+    - mongo_data:/data/db
+
+  web:
+    image: vovimayhem/real-world-node-express:development
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    volumes:
+    - .:/usr/src
+    command: npm run dev
